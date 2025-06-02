@@ -18,8 +18,8 @@ export const sendMessage = mutation({
 export const getMessages = query({
     args: {},
     handler: async (ctx) => {
-        // Get most recent messages first
         console.log(`OT: Will get the messages from the database.`)
+        console.log("OT: ctx.auth->", await ctx.auth.getUserIdentity())
         const messages = await ctx.db.query("messages").order("desc").take(50)
         // Reverse the list so that it's in a chronological order.
         return messages.reverse()
